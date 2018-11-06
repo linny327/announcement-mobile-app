@@ -1,0 +1,140 @@
+<!--err-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-firestore.js"></script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;
+                background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(thedove.jpg);
+                height: 100vh;
+                background-size: cover;
+                background-position: center;}
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+button {
+    background-color: #cc33cc;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+.content{
+    background: #fff;
+    max-width: 960px;
+    margin: 30px auto;
+    padding:  20px 30px;
+    border-radius: 10px 120px 10px 10px;
+    box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+input[type=submit] {
+    background-color: #cc33cc;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #990099;
+    padding: 20px;
+    size: 100px
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+        
+<div class="container">
+  <form action=" " id="uploadForm">
+        
+        <select id="churchSel" name="churchSel"  required>
+                <option value="" selected="selected">Select church</option>
+                
+              </select>
+              
+              <!--<select id = "dioceseSel" name = "dioceseSel" >
+              <option value="" selected="selected">Please select church first</option>
+              </select>
+              
+              <select id = "dinarySel" name = "dinarySel" >
+              <option value="" selected="selected">Please select diocese/district first</option>
+              </select> -->   
+        <!--<h1><input type="text" id="title" name="title" placeholder="Title Of The Announcement"></h1>-->     
+        <textarea id="subject" name="subject" placeholder="Write your announcement here....." style="height:200px"></textarea>       
+        <!--<input type="file" id="myFile" style="width:200px">  -->  
+       <button  style="width:100%">Post</Button>
+<p>Church not added? <a href="addchurch.html" style="color:peru">Add </a> your church details.</p><button type="button" class="cancelbtn"onclick="redirect1()" style="width:5%;background-color:red;">cancel</button>
+     
+  </form>
+  <script>
+        function redirect1(){
+              location.replace("signin.html")	
+          }
+        </script>
+  <!--<ul id="announcements-list"></ul>-->
+</div>
+<script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBvq5H0NDJAfvNxD6srwGwEtOXBKyxwZA0",
+          authDomain: "notchen-b2e44.firebaseapp.com",
+          databaseURL: "https://notchen-b2e44.firebaseio.com",
+          projectId: "notchen-b2e44",
+          storageBucket: "notchen-b2e44.appspot.com",
+          messagingSenderId: "289498987904"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true }); 
+        firestore.settings({ timestampsInSnapshots: true }); 
+      </script>     
+      
+<script src="uploadpage.js"></script>
+<script src="dynamicselect.js"></script>
+<script src="login.html"></script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>
+	<title>Notchen</title>
+	<link rel="stylesheet" type="text/css" href="announcement.css">    
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-firestore.js"></script>
+</head>
+<body>
+	<div class="container">
+
+	
+
+	<!-- Search Bar -->
+	<div class="back_trigger"></div>
+	<input type="text" class="search_bar">
+
+	<!-- Lightbox -->
+	<div class="lightbox">
+		<div class="lightbox_container">
+			<h1 class="lightbox_name">Marc</h1>
+
+			<div class="lightbox_image">
+				
+			</div>
+		</div>
+	</div>
+
+		<div class="title_bar">
+			<div class="title_top">
+				<div class="title_container">
+					<p>Notchen</p>
+				</div>
+
+				<div class="icon_container">
+					<div><img src="menu.png"></div>
+					<div><img src="search.png"></div>
+				</div>
+			</div>
+
+			<div class="tab_menu">
+				<p class="single_tab active">Announcements</p>
+				
+			</div>
+		</div>
+
+		<div class="messages_section dragscroll">
+					
+				<div id="chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
+						<div class="chat_box touchscroll chat_box_colors_a">
+								<div class="chat_message_wrapper">
+									
+									<ul class="chat_message" id="announcementsList">
+										
+										
+									</ul>
+								</div></div></div>	
+		
+	</div>   
+</body>
+<script>
+		// Initialize Firebase
+		var config = {
+				  apiKey: "AIzaSyBvq5H0NDJAfvNxD6srwGwEtOXBKyxwZA0",
+				  authDomain: "notchen-b2e44.firebaseapp.com",
+				  databaseURL: "https://notchen-b2e44.firebaseio.com",
+				  projectId: "notchen-b2e44",
+				  storageBucket: "notchen-b2e44.appspot.com",
+				  messagingSenderId: "289498987904"
+				};
+				firebase.initializeApp(config);
+				const db = firebase.firestore();
+				db.settings({ timestampsInSnapshots: true });
+			//const announcementsList = document.querySelector('#announcements-list');
+		const form = document.querySelector('#uploadForm');
+		//createElement and render announcements
+		function renderAnnouncements(doc){
+			let li = document.createElement('li');
+			let churchSel = document.createElement('p');
+			let dioceseSel = document.createElement('p');
+			let dinarySel = document.createElement('p');
+			let title = document.createElement('p');
+			let subject = document.createElement('p');
+			let myFile = document.createElement('p');
+			
+			li.setAttribute('data-id',doc.id);
+			churchSel.textContent = doc.data().churchSel;
+			dioceseSel.textContent = doc.data().dioceseSel;
+			dinarySel.textContent = doc.data().dinarySel;
+			//title.textContent = doc.data().title;
+			subject.textContent = doc.data().subject;
+			myFile.textContent = doc.data().myFile;
+			
+			//li.appendChild(churchSel);
+			//li.appendChild(dioceseSel);
+			//li.appendChild(dinarySel);
+			//li.appendChild(title);
+			li.appendChild(subject);
+			//li.appendChild(myFile);
+			
+			announcementsList.appendChild(li);
+			
+		}
+		/*db.collection('announcements').get().then((snapshot) => {
+			snapshot.docs.forEach(doc => {
+				renderAnnouncements(doc);
+			})
+		});*/
+		db.collection("announcements").where("churchSel", "==", "Anglican Church In Zimbabwe")
+		.get().then(function(querySnapshot) {
+           querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+		renderAnnouncements(doc);
+    });
+});
+			</script>
+<script src="church.html"></script>
+</html>
